@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deck Cleaner – PowerPoint Optimizer</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-inner">
+        <span class="logo">🧹</span>
+        <h1 class="app-title">Deck Cleaner</h1>
+        <p class="app-subtitle">Remove unused slide masters &amp; layouts from your .pptx files</p>
+      </div>
+    </header>
+
+    <!-- Main card -->
+    <main class="main">
+      <div class="card">
+
+        <!-- Upload section -->
+        <section id="section-upload" class="section">
+          <h2 class="section-title">Upload your PowerPoint file</h2>
+
+          <div
+            id="drop-zone"
+            class="drop-zone"
+            role="button"
+            tabindex="0"
+            aria-label="Click or drag and drop a .pptx file here"
+          >
+            <div class="drop-icon">📂</div>
+            <p class="drop-text">Drag &amp; drop your <strong>.pptx</strong> file here</p>
+            <p class="drop-or">or</p>
+            <label class="btn btn-secondary" for="file-input">
+              Browse file
+            </label>
+            <input
+              type="file"
+              id="file-input"
+              accept=".pptx"
+              class="file-input-hidden"
+              aria-label="File input"
+            />
+          </div>
+
+          <div id="file-info" class="file-info hidden">
+            <span class="file-icon">📄</span>
+            <span id="file-name" class="file-name"></span>
+            <span id="file-size" class="file-size"></span>
+            <button id="btn-clear" class="btn-icon" title="Remove file" aria-label="Remove file">✕</button>
+          </div>
+
+          <div class="upload-actions">
+            <button id="btn-optimize" class="btn btn-primary" disabled>
+              Optimize
+            </button>
+          </div>
+        </section>
+
+        <!-- Loading section (hidden by default) -->
+        <section id="section-loading" class="section hidden" aria-live="polite">
+          <div class="loader-container">
+            <div class="spinner" role="status" aria-label="Processing"></div>
+            <p class="loader-text">Optimizing your presentation…</p>
+          </div>
+        </section>
+
+        <!-- Result section (hidden by default) -->
+        <section id="section-result" class="section hidden" aria-live="polite">
+          <h2 class="section-title result-title">✅ Optimization complete!</h2>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-label">Original size</span>
+              <span id="stat-original" class="stat-value"></span>
+            </div>
+            <div class="stat-card stat-card--highlight">
+              <span class="stat-label">Optimized size</span>
+              <span id="stat-optimized" class="stat-value"></span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Layouts removed</span>
+              <span id="stat-layouts" class="stat-value"></span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Masters removed</span>
+              <span id="stat-masters" class="stat-value"></span>
+            </div>
+            <div class="stat-card stat-card--savings">
+              <span class="stat-label">Size reduction</span>
+              <span id="stat-savings" class="stat-value"></span>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button id="btn-download" class="btn btn-primary">
+              ⬇ Download optimized file
+            </button>
+            <button id="btn-reset" class="btn btn-secondary">
+              Optimize another file
+            </button>
+          </div>
+        </section>
+
+        <!-- Error section (hidden by default) -->
+        <section id="section-error" class="section hidden" aria-live="assertive">
+          <div class="error-box">
+            <span class="error-icon">⚠️</span>
+            <p id="error-message" class="error-message"></p>
+          </div>
+          <div class="result-actions">
+            <button id="btn-retry" class="btn btn-secondary">Try again</button>
+          </div>
+        </section>
+
+      </div><!-- .card -->
+    </main>
+
+    <footer class="footer">
+      <p>Deck Cleaner removes unused Open XML slide masters &amp; layouts. Your files are processed locally and never stored permanently.</p>
+    </footer>
+
+  </div><!-- #app -->
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
