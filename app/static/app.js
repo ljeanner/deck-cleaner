@@ -49,6 +49,23 @@
   // Sub-panel toggle helpers
   // ---------------------------------------------------------------------------
 
+  /** Duration in ms matching the CSS transition on .sub-panel */
+  const SUB_PANEL_TRANSITION_MS = 260;
+
+  /**
+   * Collapse a sub-panel element, hiding it after its CSS transition completes.
+   * Safe to call multiple times in quick succession.
+   * @param {HTMLElement} panel
+   */
+  function collapseSubPanel(panel) {
+    panel.classList.remove("visible");
+    setTimeout(() => {
+      if (!panel.classList.contains("visible")) {
+        panel.classList.add("hidden");
+      }
+    }, SUB_PANEL_TRANSITION_MS);
+  }
+
   /**
    * Wire up a checkbox to show/hide its associated sub-panel.
    * @param {string} checkboxId
@@ -65,13 +82,7 @@
         // Allow one frame before adding "visible" so the transition fires
         requestAnimationFrame(() => subPanel.classList.add("visible"));
       } else {
-        subPanel.classList.remove("visible");
-        // Hide after transition completes
-        subPanel.addEventListener(
-          "transitionend",
-          () => { if (!subPanel.classList.contains("visible")) subPanel.classList.add("hidden"); },
-          { once: true }
-        );
+        collapseSubPanel(subPanel);
       }
     }
 
@@ -151,14 +162,7 @@
     optionCheckboxes.forEach((cb) => { cb.disabled = true; });
 
     // Collapse all open sub-panels
-    document.querySelectorAll(".sub-panel.visible").forEach((panel) => {
-      panel.classList.remove("visible");
-      panel.addEventListener(
-        "transitionend",
-        () => { if (!panel.classList.contains("visible")) panel.classList.add("hidden"); },
-        { once: true }
-      );
-    });
+    document.querySelectorAll(".sub-panel.visible").forEach(collapseSubPanel);
   }
 
   /**
