@@ -46,6 +46,42 @@
   const optionCheckboxes = document.querySelectorAll(".option-checkbox");
 
   // ---------------------------------------------------------------------------
+  // Sub-panel toggle helpers
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Wire up a checkbox to show/hide its associated sub-panel.
+   * @param {string} checkboxId
+   * @param {string} subPanelId
+   */
+  function bindSubPanel(checkboxId, subPanelId) {
+    const checkbox  = document.getElementById(checkboxId);
+    const subPanel  = document.getElementById(subPanelId);
+    if (!checkbox || !subPanel) return;
+
+    function syncPanel() {
+      if (checkbox.checked && !checkbox.disabled) {
+        subPanel.classList.remove("hidden");
+        // Allow one frame before adding "visible" so the transition fires
+        requestAnimationFrame(() => subPanel.classList.add("visible"));
+      } else {
+        subPanel.classList.remove("visible");
+        // Hide after transition completes
+        subPanel.addEventListener(
+          "transitionend",
+          () => { if (!subPanel.classList.contains("visible")) subPanel.classList.add("hidden"); },
+          { once: true }
+        );
+      }
+    }
+
+    checkbox.addEventListener("change", syncPanel);
+  }
+
+  bindSubPanel("opt-compress-images", "sub-compress-images");
+  bindSubPanel("opt-compress-videos", "sub-compress-videos");
+
+  // ---------------------------------------------------------------------------
   // State
   // ---------------------------------------------------------------------------
 
@@ -113,6 +149,16 @@
     fileInfo.classList.add("hidden");
     btnOptimize.disabled = true;
     optionCheckboxes.forEach((cb) => { cb.disabled = true; });
+
+    // Collapse all open sub-panels
+    document.querySelectorAll(".sub-panel.visible").forEach((panel) => {
+      panel.classList.remove("visible");
+      panel.addEventListener(
+        "transitionend",
+        () => { if (!panel.classList.contains("visible")) panel.classList.add("hidden"); },
+        { once: true }
+      );
+    });
   }
 
   /**

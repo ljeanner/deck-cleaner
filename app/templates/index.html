@@ -82,6 +82,48 @@
                 <input type="checkbox" id="opt-compress-images" class="option-checkbox" disabled />
                 <span class="option-label">Compress images</span>
               </label>
+              <div id="sub-compress-images" class="sub-panel hidden" aria-live="polite">
+                <div class="sub-panel-inner">
+                  <span class="sub-panel-label">Compression level</span>
+                  <div class="sub-panel-options">
+                    <label class="sub-option">
+                      <input type="radio" name="image-compression" value="low" class="sub-option-radio" />
+                      <span>Low</span>
+                    </label>
+                    <label class="sub-option">
+                      <input type="radio" name="image-compression" value="medium" class="sub-option-radio" checked />
+                      <span>Medium</span>
+                    </label>
+                    <label class="sub-option">
+                      <input type="radio" name="image-compression" value="high" class="sub-option-radio" />
+                      <span>High</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <label class="option-item">
+                <input type="checkbox" id="opt-compress-videos" class="option-checkbox" disabled />
+                <span class="option-label">Compress videos</span>
+              </label>
+              <div id="sub-compress-videos" class="sub-panel hidden" aria-live="polite">
+                <div class="sub-panel-inner">
+                  <span class="sub-panel-label">Target quality</span>
+                  <div class="sub-panel-options">
+                    <label class="sub-option">
+                      <input type="radio" name="video-quality" value="480p" class="sub-option-radio" />
+                      <span>480p — Small file</span>
+                    </label>
+                    <label class="sub-option">
+                      <input type="radio" name="video-quality" value="720p" class="sub-option-radio" checked />
+                      <span>720p — Balanced</span>
+                    </label>
+                    <label class="sub-option">
+                      <input type="radio" name="video-quality" value="1080p" class="sub-option-radio" />
+                      <span>1080p — High quality</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
               <label class="option-item">
                 <input type="checkbox" id="opt-strip-metadata" class="option-checkbox" disabled />
                 <span class="option-label">Strip metadata</span>
