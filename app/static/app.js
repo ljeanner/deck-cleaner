@@ -42,6 +42,9 @@
   const btnRetry    = document.getElementById("btn-retry");
   const errorMsg    = document.getElementById("error-message");
 
+  /** @type {NodeListOf<HTMLInputElement>} */
+  const optionCheckboxes = document.querySelectorAll(".option-checkbox");
+
   // ---------------------------------------------------------------------------
   // State
   // ---------------------------------------------------------------------------
@@ -97,6 +100,7 @@
     fileSizeEl.textContent = "(" + formatBytes(file.size) + ")";
     fileInfo.classList.remove("hidden");
     btnOptimize.disabled = false;
+    optionCheckboxes.forEach((cb) => { cb.disabled = false; });
   }
 
   /**
@@ -108,6 +112,7 @@
     fileInput.value = "";
     fileInfo.classList.add("hidden");
     btnOptimize.disabled = true;
+    optionCheckboxes.forEach((cb) => { cb.disabled = true; });
   }
 
   /**

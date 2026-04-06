@@ -56,6 +56,63 @@
             <button id="btn-clear" class="btn-icon" title="Remove file" aria-label="Remove file">✕</button>
           </div>
 
+          <!-- Processing options -->
+          <div id="options-panel" class="options-panel">
+            <h3 class="options-title">Processing options</h3>
+
+            <div class="options-group">
+              <h4 class="options-group-title">Optimization</h4>
+              <label class="option-item">
+                <input type="checkbox" id="opt-remove-masters" class="option-checkbox" checked disabled />
+                <span class="option-label">Remove unused slide masters</span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" id="opt-remove-layouts" class="option-checkbox" checked disabled />
+                <span class="option-label">Remove unused slide layouts</span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" id="opt-remove-hidden" class="option-checkbox" disabled />
+                <span class="option-label">Remove hidden slides</span>
+              </label>
+            </div>
+
+            <div class="options-group">
+              <h4 class="options-group-title">Media</h4>
+              <label class="option-item">
+                <input type="checkbox" id="opt-compress-images" class="option-checkbox" disabled />
+                <span class="option-label">Compress images</span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" id="opt-strip-metadata" class="option-checkbox" disabled />
+                <span class="option-label">Strip metadata</span>
+              </label>
+            </div>
+
+            <div class="options-group">
+              <h4 class="options-group-title">Export</h4>
+              <label class="option-item">
+                <input type="checkbox" id="opt-flatten-master" class="option-checkbox" disabled />
+                <span class="option-label">Flatten to single master</span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" id="opt-subset-fonts" class="option-checkbox" disabled />
+                <span class="option-label">Subset embedded fonts</span>
+              </label>
+            </div>
+
+            <div class="options-group">
+              <h4 class="options-group-title">Intelligence</h4>
+              <label class="option-item">
+                <input type="checkbox" id="opt-flag-oversized" class="option-checkbox" disabled />
+                <span class="option-label">Flag oversized slides</span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" id="opt-detect-duplicates" class="option-checkbox" disabled />
+                <span class="option-label">Detect duplicate content</span>
+              </label>
+            </div>
+          </div>
+
           <div class="upload-actions">
             <button id="btn-optimize" class="btn btn-primary" disabled>
               Optimize
