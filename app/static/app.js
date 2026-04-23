@@ -46,6 +46,53 @@
   const optionCheckboxes = document.querySelectorAll(".option-checkbox");
 
   // ---------------------------------------------------------------------------
+  // Sub-panel toggle helpers
+  // ---------------------------------------------------------------------------
+
+  /** Duration in ms matching the CSS transition on .sub-panel */
+  const SUB_PANEL_TRANSITION_MS = 260;
+
+  /**
+   * Collapse a sub-panel element, hiding it after its CSS transition completes.
+   * Safe to call multiple times in quick succession.
+   * @param {HTMLElement} panel
+   */
+  function collapseSubPanel(panel) {
+    panel.classList.remove("visible");
+    setTimeout(() => {
+      if (!panel.classList.contains("visible")) {
+        panel.classList.add("hidden");
+      }
+    }, SUB_PANEL_TRANSITION_MS);
+  }
+
+  /**
+   * Wire up a checkbox to show/hide its associated sub-panel.
+   * @param {string} checkboxId
+   * @param {string} subPanelId
+   */
+  function bindSubPanel(checkboxId, subPanelId) {
+    const checkbox  = document.getElementById(checkboxId);
+    const subPanel  = document.getElementById(subPanelId);
+    if (!checkbox || !subPanel) return;
+
+    function syncPanel() {
+      if (checkbox.checked && !checkbox.disabled) {
+        subPanel.classList.remove("hidden");
+        // Allow one frame before adding "visible" so the transition fires
+        requestAnimationFrame(() => subPanel.classList.add("visible"));
+      } else {
+        collapseSubPanel(subPanel);
+      }
+    }
+
+    checkbox.addEventListener("change", syncPanel);
+  }
+
+  bindSubPanel("opt-compress-images", "sub-compress-images");
+  bindSubPanel("opt-compress-videos", "sub-compress-videos");
+
+  // ---------------------------------------------------------------------------
   // State
   // ---------------------------------------------------------------------------
 
@@ -113,6 +160,9 @@
     fileInfo.classList.add("hidden");
     btnOptimize.disabled = true;
     optionCheckboxes.forEach((cb) => { cb.disabled = true; });
+
+    // Collapse all open sub-panels
+    document.querySelectorAll(".sub-panel.visible").forEach(collapseSubPanel);
   }
 
   /**
